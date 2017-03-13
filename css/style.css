@@ -1,0 +1,17 @@
+ body {
+            font-size: 16px;
+            background-color: #fefefe;
+            color: rgba(0, 0, 0, 0.78);
+        }
+        
+        .panel {
+            margin: 32px 0;
+        }
+        
+        .panel-body {
+            background-color: #feffff;
+        }
+
+.form-control{
+    padding: 10px 10px; 
+}

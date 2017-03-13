@@ -1,0 +1,10 @@
+- app items will be grouped at bottom{{"_file":"C:/Users/allst/Desktop/midterm- webapplication/index.html"}}
+- items need to be styled to indicate style
+- each to do needs: description, due date, and a completed flag
+
+# general
+- create items
+- delete items
+- edit items
+- local storage is needed for session to session storage
+

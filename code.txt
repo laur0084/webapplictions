@@ -1,0 +1,62 @@
+OK lets start with some basics … you have malformed HTML.  
+
+The minimum scaffolding for an HTML document looks like this …
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    
+  </body>
+</html>
+
+
+Your index.html file has no <head> section.  Your modal content section has many missing closing </div> tags and a missing closing </form> tag.
+
+
+Next, those missing tags were harder to see because you did not have consistent code formatting.  Following some basic code style guides makes it much easier to read your code and find bugs.
+
+Try using 2 spaces for indenting (see the example above).  Make sure that everything that is at the same nesting level is lined up.  Keep your lines shorter than 100 characters.  If you have many attributes in a tag that makes the line long, you can stack them …
+
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous”>
+
+
+Use semantically descriptive variable names.  It really helps you to reason about your code without have to hunt through trying to figure out what “x” is.
+
+e.g   ng-click="changeState(x)”  would be easier to understand as  ng-click=“changeState(todoItem)”
+
+Similarly, when I see a function named  changeState() it is not immediately clear what that is supposed to do.  What state is it changing?  What are the possible values?  How many arguments should I pass?
+
+If we name it something like  toggleDone(todoItem) then I know at a glance what it should be doing.
+
+When choosing names, try to be explicit.  Also, there are some well used industry best practices like naming variables or object properties that hold a boolean value starting with is or did.  e.g. isDone or didLoad
+
+And for function names put the verb first and the noun second.  e.g. addTodo() is preferred over todoAdd()
+
+OK while not technically required to complete the assignment, consistently following these practices will really help you … and make it easier for me to help you :-)
+
+
+In your forms, you want to be accessing a single todoItem object and bind the properties to the specific input elements with ng-model. e.g. 
+
+<input type=“text” ng-model=“newTodo.description”>
+<input type=“text” ng-model=“newTodo.dueDate”>
+
+Then in your app.js file you will need to initialize the variable at the top of your controller:
+
+$scope.newItem = {
+  id: cuid(),
+  description: '',
+  dueDate: ‘’,
+  isDone: false
+}
+
+Then you will need to repeat that at the end of your addItem()  function to reset it each time.  This also means that you can simplify the array.push() in your addItem() function to be something like …
+
+$scope.todoList.push(newItem)
