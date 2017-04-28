@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Condensed:300,400">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/app.css">
+  <title>Web applications Final</title>
+</head>
+
+  
+  <!-- the add task section-->
+<body ng-app="app">
+  <div class="container" style="width: 600px;">
+    <div>
+      <h1>Web applications Final</h1>
+      <br>
+      <section class="new-customer-form" ng-controller="CustomerCtrl as ctrl">
+        <h2>Add new task</h2>
+        <form ng-submit="ctrl.addCustomer(ctrl.newCustomer)">
+          <div class="form-group">
+            <label for="taskName">Task Name</label>
+            <input type="text" class="form-control" id="TaskName" required ng-model="ctrl.newCustomer.taskName"> </div>
+          <div class="form-group">
+            <label for="dueDate">Due Date</label>
+            <input type="text" class="form-control" id="dueDate" required ng-model="ctrl.newCustomer.dueDate"> </div>
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            <input type="text" class="form-control" id="comment" required ng-model="ctrl.newCustomer.comment"> </div>
+          <div class="form-group">
+            <label>Importance</label>
+            <input type="radio" value="High" class="radio" ng-model="ctrl.newCustomer.importance" checked>High
+            <input type="radio" value="Average" class="radio" ng-model="ctrl.newCustomer.importance">Average
+            <input type="radio" value="Low" class="radio" ng-model="ctrl.newCustomer.importance">Low </div>
+          <button type="submit" class="btn btn-primary btn-block"> Add new Todo </button>
+        </form>
+      </section>
+      <hr>
+    </div>
+    <!-- end add task section-->
+    
+    
+    <!-- display task importance high section-->
+    <div class="row">
+    <div class="col-md-6">
+      <h2>To Do List<span class="text-muted pull-right"><span class="fa fa-list-ul"></span> {{ctrl.customers.length}}</span></h2>
+      <h3 class="lead">High Importance</h3>
+      <section class="customer-list" ng-controller="CustomerCtrl as ctrl">
+        <div class="customer-list-item" ng-repeat="customer in ctrl.customers | filter: { importance : 'High'}  | orderBy: ['importance'] track by customer.$id">
+          <div class="alert alert-danger">
+            <div class="form-inline">
+              <input type="text" class="form-control outputText" ng-model="customer.taskName">&nbsp;
+              <input type="text" class="form-control outputText" ng-model="customer.dueDate">
+              <input type="text" class="form-control outputText" ng-model="customer.comment">
+              <input type="radio" value="High" class="radio" ng-model="customer.importance">High
+              <input type="radio" value="Average" class="radio" ng-model="customer.importance">Average
+              <input type="radio" value="Low" class="radio" ng-model="customer.importance">Low 
+            </div>
+            <button class="btn btn-success btn-sm" ng-click="ctrl.save(customer)"> Save </button>
+            <button class="btn btn-danger btn-sm" ng-click="ctrl.remove(customer)"> <span class="glyphicon glyphicon-trash"></span> </button>
+          </div>
+          </div>
+      </section>
+      </div>
+    </div>
+     
+    
+    <!-- display task importance avarage section-->
+    <div class="row">
+    <div class="col-md-6">
+      <h3 class="lead">Average Importance</h3>
+      <section class="customer-list" ng-controller="CustomerCtrl as ctrl">
+        <div class="customer-list-item" ng-repeat="customer in ctrl.customers | filter: { importance : 'Average'}  | orderBy: ['importance'] track by customer.$id">
+          <div class="alert alert-warning">
+            <div class="form-inline">
+              <input type="text" class="form-control outputText" ng-model="customer.taskName">&nbsp;
+              <input type="text" class="form-control outputText" ng-model="customer.dueDate">
+              <input type="text" class="form-control outputText" ng-model="customer.comment">
+              <input type="radio" value="High" class="radio" ng-model="customer.importance">High
+              <input type="radio" value="Average" class="radio" ng-model="customer.importance">Average
+              <input type="radio" value="Low" class="radio" ng-model="customer.importance">Low   
+            </div>
+            <button class="btn btn-success btn-sm" ng-click="ctrl.save(customer)"> Save </button>
+            <button class="btn btn-danger btn-sm" ng-click="ctrl.remove(customer)"> <span class="glyphicon glyphicon-trash"></span> </button>
+          </div>
+          </div>
+      </section>
+      </div>
+    </div>
+    
+    <!-- display task importance low section-->
+    <div class="row">
+    <div class="col-md-6">
+      <h3 class="lead">Low Importance</h3>
+      <section class="customer-list" ng-controller="CustomerCtrl as ctrl">
+        <div class="customer-list-item" ng-repeat="customer in ctrl.customers | filter: { importance : 'Low'}  | orderBy: ['importance'] track by customer.$id">
+          <div class="alert alert-success">
+            <div class="form-inline">
+              <input type="text" class="form-control outputText" ng-model="customer.taskName">&nbsp;
+              <input type="text" class="form-control outputText" ng-model="customer.dueDate">
+              <input type="text" class="form-control outputText" ng-model="customer.comment">
+              <input type="radio" value="High" class="radio" ng-model="customer.importance">High
+              <input type="radio" value="Average" class="radio" ng-model="customer.importance">Average
+              <input type="radio" value="Low" class="radio" ng-model="customer.importance">Low  
+            </div>
+            <button class="btn btn-success btn-sm" ng-click="ctrl.save(customer)"> Save </button>
+            <button class="btn btn-danger btn-sm" ng-click="ctrl.remove(customer)"> <span class="glyphicon glyphicon-trash"></span> </button>
+          </div>
+          </div>
+      </section>
+      </div>
+    </div>
+    </div><!--end of div container-->
+    <!-- Load Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <!-- Load Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <!-- Load AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <!-- Load our app -->
+    <script src="scirpts/app.js"></script>
+</body>
+</html>
